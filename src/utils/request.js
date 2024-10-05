@@ -1,4 +1,4 @@
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/moudles/user.js'
 import axios from 'axios'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
@@ -9,7 +9,7 @@ const instance = axios.create({
   baseURL,
   timeout: 100000
 })
-
+// 请求头
 instance.interceptors.request.use(
   (config) => {
     const userStore = useUserStore()
@@ -20,7 +20,7 @@ instance.interceptors.request.use(
   },
   (err) => Promise.reject(err)
 )
-
+// 响应拦截器
 instance.interceptors.response.use(
   (res) => {
     if (res.data.code === 0) {

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,7 +10,7 @@ const router = createRouter({
     }, //登录页
     {
       path: '/',
-      component: () => import('@/views/layout/LayoutContainer.vue'),
+      component: () => import('@/views/layout/LayoutCountainer.vue'),
       redirect: '/article/manage',
       children: [
         {
@@ -33,8 +34,21 @@ const router = createRouter({
           component: () => import('@/views/user/UserPassword.vue')
         }
       ]
+    },
+    // 文章详情
+    {
+      path: '/detail/:id',
+      name: 'detail',
+      component: () => import('@/views/detail/articalCompoment.vue')
     }
   ]
 })
 
+// 登录拦截
+router.beforeEach((to) => {
+  const useStore = useUserStore()
+  if (!useStore.token && to.path !== '/login') {
+    return { path: '/login' }
+  }
+})
 export default router
