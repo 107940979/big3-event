@@ -4,7 +4,7 @@
 户注册，登录，修改个人信息的系统
 
 ## Installation tutorial
-Clone code:git clone
+Clone code:git clone https://github.com/107940979/big3-event.git
 ## 安装依赖
 
 ```sh
